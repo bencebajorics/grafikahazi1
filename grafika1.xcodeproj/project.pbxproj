@@ -1,0 +1,229 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F41074C117EDF4A100DFB39B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F41074C017EDF4A100DFB39B /* main.cpp */; };
+		F41074C317EDF4A100DFB39B /* grafika1.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F41074C217EDF4A100DFB39B /* grafika1.1 */; };
+		F41074CA17EDF4FB00DFB39B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41074C917EDF4FB00DFB39B /* OpenGL.framework */; };
+		F41074CC17EDF50300DFB39B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41074CB17EDF50300DFB39B /* GLUT.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F41074BB17EDF4A100DFB39B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				F41074C317EDF4A100DFB39B /* grafika1.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F41074BD17EDF4A100DFB39B /* grafika1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = grafika1; sourceTree = BUILT_PRODUCTS_DIR; };
+		F41074C017EDF4A100DFB39B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F41074C217EDF4A100DFB39B /* grafika1.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = grafika1.1; sourceTree = "<group>"; };
+		F41074C917EDF4FB00DFB39B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		F41074CB17EDF50300DFB39B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F41074BA17EDF4A100DFB39B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F41074CC17EDF50300DFB39B /* GLUT.framework in Frameworks */,
+				F41074CA17EDF4FB00DFB39B /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F41074B417EDF4A100DFB39B = {
+			isa = PBXGroup;
+			children = (
+				F41074CB17EDF50300DFB39B /* GLUT.framework */,
+				F41074C917EDF4FB00DFB39B /* OpenGL.framework */,
+				F41074BF17EDF4A100DFB39B /* grafika1 */,
+				F41074BE17EDF4A100DFB39B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F41074BE17EDF4A100DFB39B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F41074BD17EDF4A100DFB39B /* grafika1 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F41074BF17EDF4A100DFB39B /* grafika1 */ = {
+			isa = PBXGroup;
+			children = (
+				F41074C017EDF4A100DFB39B /* main.cpp */,
+				F41074C217EDF4A100DFB39B /* grafika1.1 */,
+			);
+			path = grafika1;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F41074BC17EDF4A100DFB39B /* grafika1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F41074C617EDF4A100DFB39B /* Build configuration list for PBXNativeTarget "grafika1" */;
+			buildPhases = (
+				F41074B917EDF4A100DFB39B /* Sources */,
+				F41074BA17EDF4A100DFB39B /* Frameworks */,
+				F41074BB17EDF4A100DFB39B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = grafika1;
+			productName = grafika1;
+			productReference = F41074BD17EDF4A100DFB39B /* grafika1 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F41074B517EDF4A100DFB39B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Bence Bajorics";
+			};
+			buildConfigurationList = F41074B817EDF4A100DFB39B /* Build configuration list for PBXProject "grafika1" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F41074B417EDF4A100DFB39B;
+			productRefGroup = F41074BE17EDF4A100DFB39B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F41074BC17EDF4A100DFB39B /* grafika1 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F41074B917EDF4A100DFB39B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F41074C117EDF4A100DFB39B /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F41074C417EDF4A100DFB39B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F41074C517EDF4A100DFB39B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F41074C717EDF4A100DFB39B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F41074C817EDF4A100DFB39B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F41074B817EDF4A100DFB39B /* Build configuration list for PBXProject "grafika1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F41074C417EDF4A100DFB39B /* Debug */,
+				F41074C517EDF4A100DFB39B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F41074C617EDF4A100DFB39B /* Build configuration list for PBXNativeTarget "grafika1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F41074C717EDF4A100DFB39B /* Debug */,
+				F41074C817EDF4A100DFB39B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F41074B517EDF4A100DFB39B /* Project object */;
+}
