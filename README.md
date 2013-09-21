@@ -3,4 +3,4 @@ grafikahazi1
 
 Grafika 1. Házi
 
-Ide fogom hányni a cuccot
+Ide fogom nyomni a cuccot
