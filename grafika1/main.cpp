@@ -125,10 +125,11 @@ Color image[screenWidth*screenHeight];	// egy alkalmazás ablaknyi kép
 void onInitialization( ) {
 	glViewport(0, 0, screenWidth, screenHeight);
     
+    
     // Peldakent keszitunk egy kepet az operativ memoriaba
     for(int Y = 0; Y < screenHeight; Y++)
 		for(int X = 0; X < screenWidth; X++)
-			image[Y*screenWidth + X] = Color((float)X/screenWidth, (float)Y/screenHeight, 0);
+		image[Y*screenWidth + X] = Color(0,0.3,1);
     
 }
 
@@ -142,18 +143,40 @@ void onDisplay( ) {
     // Peldakent atmasoljuk a kepet a rasztertarba
     glDrawPixels(screenWidth, screenHeight, GL_RGB, GL_FLOAT, image);
     // Majd rajzolunk egy kek haromszoget
-	glColor3f(0, 0, 1);
-	glBegin(GL_TRIANGLES);
-    glVertex2f(-0.2f, -0.2f);
-    glVertex2f( 0.2f, -0.2f);
-    glVertex2f( 0.0f,  0.2f);
-	glEnd( );
+	//glColor3f(0, 0, 1);
+	//glBegin(GL_TRIANGLES);
+    //glVertex2f(-1.5f, -0.5f);
+    //glVertex2f( 0.5f, -0.5f);
+    //glVertex2f( 0.0f,  0.5f);
+    
+        int i;
+        
+        glBegin(GL_TRIANGLE_FAN);
+        glColor3f(0, 1, 0.3);
+        
+        for(i=0;i<360;i++)
+        {
+            float rad = i*1.0/180.0*3.14;
+            glVertex2f(cos(rad)*1.5,
+                       sin(rad)*0.6-1);
+        }
+        
+        glEnd();
     
     // ...
     
     glutSwapBuffers();     				// Buffercsere: rajzolas vege
     
 }
+
+class greenBird{
+public:
+    greenBird();
+    
+    int flyingRout();
+
+
+};
 
 // Billentyuzet esemenyeket lekezelo fuggveny (lenyomas)
 void onKeyboard(unsigned char key, int x, int y) {
@@ -173,8 +196,7 @@ void onMouse(int button, int state, int x, int y) {
 }
 
 // Eger mozgast lekezelo fuggveny
-void onMouseMotion(int x, int y)
-{
+void onMouseMotion(int x, int y){
     
 }
 
