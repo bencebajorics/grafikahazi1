@@ -149,19 +149,19 @@ void onDisplay( ) {
     //glVertex2f( 0.5f, -0.5f);
     //glVertex2f( 0.0f,  0.5f);
     
-        int i;
+    int i;
         
-        glBegin(GL_TRIANGLE_FAN);
-        glColor3f(0, 1, 0.3);
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3f(0, 1, 0.3);
         
-        for(i=0;i<360;i++)
-        {
-            float rad = i*1.0/180.0*3.14;
-            glVertex2f(cos(rad)*1.5,
+    for(i=0;i<360;i++)
+    {
+        float rad = i*1.0/180.0*3.14;
+        glVertex2f(cos(rad)*1.5,
                        sin(rad)*0.6-1);
-        }
+    }
         
-        glEnd();
+    glEnd();
     
     // ...
     
