@@ -149,16 +149,40 @@ void onDisplay( ) {
     //glVertex2f( 0.5f, -0.5f);
     //glVertex2f( 0.0f,  0.5f);
     
-    int i;
+    
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.5, 0.25);
+    
+
+    glVertex2f( 0.225, 0.0);
+    glVertex2f( 0.375, 0.0);
+    glVertex2f( 0.375, 0.5);      // 1. szár
+    glVertex2f( 0.6, 0.8);      // 1. oldalág
+    glVertex2f( 0.55, 0.8);
+    glVertex2f( 0.3, 0.4);      // középpont
+        
+    glEnd();
+    
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.5, 0.25);
+    
+    glVertex2f( 0.375, 0.0);
+    glVertex2f( 0.225, 0.0);      // 2. szár
+    glVertex2f( 0.225, 0.5);
+    glVertex2f( 0.3, 0.4);
+    glVertex2f( 0.05, 0.8);     // 2. oldalág
+    glVertex2f( 0.0, 0.8);
+    
+    glEnd();
+    
+    
         
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(0, 1, 0.3);
         
-    for(i=0;i<360;i++)
-    {
-        float rad = i*1.0/180.0*3.14;
-        glVertex2f(cos(rad)*1.5,
-                       sin(rad)*0.6-1);
+    for(int i=0;i<360;i++){
+        float rad = i/180.0*3.14;
+        glVertex2f(cos(rad)*1.5, sin(rad)*0.6-1);
     }
         
     glEnd();
@@ -170,10 +194,12 @@ void onDisplay( ) {
 }
 
 class greenBird{
+    int x;
+    int y;
 public:
     greenBird();
     
-    int flyingRout();
+    float flyingRout();
 
 
 };
