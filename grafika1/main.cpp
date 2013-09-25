@@ -133,39 +133,131 @@ void onInitialization( ) {
     
 }
 
-float birdPositionX = 0;
-float birdPositionY = 0;
 long time_slow = 0;
 
 class Bird{
+protected:
     
-    double x;
-    double y;
+    float x = 0.0;
+    float y = 0.0;
     
 public:
-    Bird();
+    Bird(){}
     
-    void drawBird(double x, double y, float R, float G, float B){
+    Bird(float x, float y):x(x), y(y){}
+    
+    void drawBird(float c, float R, float G, float B){
+        
+        
+        
+        glBegin(GL_TRIANGLE_FAN);                   // test
+        glColor3f(R, G, B);
+        
+        
         
         for(int i = 0; i < 360; i++){
             float rad = i / 180.0 * 3.14;
-            glVertex2f(cos(rad) * 0.1, sin(rad) * 0.1 - 1);
+            glVertex2f(cos(rad) * 0.08 + c * x, sin(rad) * 0.1 + y);
         }
         glEnd();
-    
-    }
         
-    double getGreenBirdYForTime(float time){
+        glBegin(GL_TRIANGLE_FAN);                   // szem
+        glColor3f(1, 1, 1);
+        
+        
+        
+        for(int i = 0; i < 360; i++){
+            float rad = i / 180.0 * 3.14;
+            glVertex2f(cos(rad) * 0.033 + c * (0.036 + x), sin(rad) * 0.05 + 0.02 + y);
+        }
+        glEnd();
+        
+        glBegin(GL_TRIANGLE_FAN);                   // szemgolyó
+        glColor3f(0.0, 0.0, 0.0);
+        
+        
+        
+        for(int i = 0; i < 360; i++){
+            float rad = i / 180.0 * 3.14;
+            glVertex2f(cos(rad) * 0.015 + c * (0.05 + x), sin(rad) * 0.025 + 0.01 + y);
+        }
+        glEnd();
+        
+        
+        glBegin(GL_TRIANGLES);                      // csőr
+        glColor3f(0.85, 0.75, 0.2);
+        
+        glVertex2f(c * (0.12 + x), -0.05 + y);
+        glVertex2f(c * (0.06 + x), -0.07 + y);
+        glVertex2f(c * (0.08 + x), -0.005 + y);
+        
+        glEnd();
+        
+        
+        glBegin(GL_TRIANGLES);                      // szemöldök
+        glColor3f(0.0, 0.0, 0.0);
+        
+        glVertex2f(c * (0.09 + x), 0.04 + y);
+        glVertex2f(c * (0.04 + x), 0.11 + y);
+        glVertex2f(c * (-0.02 + x), 0.13 + y);
+        
+        glEnd();
+        
+        
+        glBegin(GL_TRIANGLES);                      // farok toll 1.
+        glColor3f(1.0, 1.0, 0.0);
+        
+        glVertex2f(c * (-0.06 + x), -0.06 + y);
+        glVertex2f(c * (-0.12 + x), -0.02 + y);
+        glVertex2f(c * (-0.14 + x), -0.03 + y);
+        
+        glEnd();
+        
+        glBegin(GL_TRIANGLES);                      // farok toll 2.
+        glColor3f(1.0, 1.0, 0.0);
+        
+        glVertex2f(c * (-0.06 + x), -0.06 + y);
+        glVertex2f(c * (-0.11 + x), -0.07 + y);
+        glVertex2f(c * (-0.13 + x), -0.05 + y);
+        
+        glEnd();
+        
+        glBegin(GL_TRIANGLES);                      // farok toll 3.
+        glColor3f(1.0, 1.0, 0.0);
+        
+        glVertex2f(c * (-0.06 + x), -0.06 + y);
+        glVertex2f(c * (-0.1 + x), -0.1 + y);
+        glVertex2f(c * (-0.1 + x), -0.08 + y);
+        
+        glEnd();
+        
+        glBegin(GL_TRIANGLES);                      // szárny
+        glColor3f(0.85, 0.75, 0.2);
+        
+        glVertex2f(c * (-0.07 + x), 0.0 + y);
+        glVertex2f(c * (-0.02 + x), -0.07 + y);
+        glVertex2f(c * (0.02 + x), -0.05 + y);
+        
+        glEnd();
+        
+    }
+    
+        
+};
+
+class greenBird : public Bird{
+    
+public:
+    greenBird(float x, float y):Bird(x, y){}
+    
+    void getGreenBirdYForTime(float time){
+        
         float rad = time / 180.0 * 3.14;
         
-        return sin(rad);
+        y = sin(rad)/1.6;
+        
     }
-        
-    double getGreenBirdXForTime(float time){
-        return time;
-    }
-        
-        
+
 };
 
 
@@ -184,108 +276,9 @@ return y;
 }
 
 
-void drawBird(float c, float x, float y, float R, float G, float B){
-    
-    
-    
-    glBegin(GL_TRIANGLE_FAN);
-    glColor3f(R, G, B);
-    
-    
-    
-    for(int i = 0; i < 360; i++){
-        float rad = i / 180.0 * 3.14;
-        glVertex2f(cos(rad) * 0.08 + c * x, sin(rad) * 0.1 + y);
-    }
-    glEnd();
-    
-    glBegin(GL_TRIANGLE_FAN);
-    glColor3f(1, 1, 1);
-    
-    
-    
-    for(int i = 0; i < 360; i++){
-        float rad = i / 180.0 * 3.14;
-        glVertex2f(cos(rad) * 0.033 + c * (0.036 + x), sin(rad) * 0.05 + 0.02 + y);
-    }
-    glEnd();
-    
-    glBegin(GL_TRIANGLE_FAN);
-    glColor3f(0.0, 0.0, 0.0);
-    
-    
-    
-    for(int i = 0; i < 360; i++){
-        float rad = i / 180.0 * 3.14;
-        glVertex2f(cos(rad) * 0.015 + c * (0.05 + x), sin(rad) * 0.025 + 0.01 + y);
-    }
-    glEnd();
-    
-    
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.85, 0.75, 0.2);
-    
-    glVertex2f(c * (0.12 + x), -0.05 + y);
-    glVertex2f(c * (0.06 + x), -0.07 + y);
-    glVertex2f(c * (0.08 + x), -0.005 + y);
-    
-    glEnd();
-    
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.0, 0.0, 0.0);
-    
-    glVertex2f(c * (0.09 + x), 0.04 + y);
-    glVertex2f(c * (0.04 + x), 0.11 + y);
-    glVertex2f(c * (-0.02 + x), 0.13 + y);
-    
-    glEnd();
-    
-    
-    glBegin(GL_TRIANGLES);
-    glColor3f(1.0, 1.0, 0.0);
-    
-    glVertex2f(c * (-0.06 + x), -0.06 + y);
-    glVertex2f(c * (-0.12 + x), -0.02 + y);
-    glVertex2f(c * (-0.14 + x), -0.03 + y);
-    
-    glEnd();
-    
-    glBegin(GL_TRIANGLES);
-    glColor3f(1.0, 1.0, 0.0);
-    
-    glVertex2f(c * (-0.06 + x), -0.06 + y);
-    glVertex2f(c * (-0.11 + x), -0.07 + y);
-    glVertex2f(c * (-0.13 + x), -0.05 + y);
-    
-    glEnd();
-    
-    glBegin(GL_TRIANGLES);
-    glColor3f(1.0, 1.0, 0.0);
-    
-    glVertex2f(c * (-0.06 + x), -0.06 + y);
-    glVertex2f(c * (-0.1 + x), -0.1 + y);
-    glVertex2f(c * (-0.1 + x), -0.08 + y);
-    
-    glEnd();
-    
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.85, 0.75, 0.2);
-    
-    glVertex2f(c * (-0.07 + x), 0.0 + y);
-    glVertex2f(c * (-0.02 + x), -0.07 + y);
-    glVertex2f(c * (0.02 + x), -0.05 + y);
-    
-    glEnd();
-    
-}
+greenBird *green = new greenBird(-0.7, 0.0);
+Bird *red = new Bird(-0.33, -0.25);
 
-void getGreenBirdYForTime(float time){
-
-    float rad = time / 180.0 * 3.14;
-    
-    birdPositionY = sin(rad)/2.0;
-    
-}
 
 
 // Rajzolas, ha az alkalmazas ablak ervenytelenne valik, akkor ez a fuggveny hivodik meg
@@ -312,6 +305,43 @@ void onDisplay( ) {
         float rad = i/180.0*3.14;
         glVertex2f(cos(rad)*1.5, sin(rad)*0.6-1.3);
     }
+    
+    glEnd();
+    
+    glBegin(GL_TRIANGLE_FAN);               // napocska :)
+    glColor3f(1.0, 1.0, 0.0);
+    
+    for(int i=0;i<360;i++){
+        float rad = i/180.0*3.14;
+        glVertex2f(cos(rad)*1.0 - 1.5, sin(rad)*1.0 + 1.4);
+    }
+    
+    glEnd();
+    
+    glBegin(GL_TRIANGLES);                      // sugár 1.
+    glColor3f(1.0, 1.0, 0.0);
+    
+    glVertex2f(-0.75, 0.95);
+    glVertex2f(-0.45, 0.85);
+    glVertex2f(-0.4, 0.90);
+    
+    glEnd();
+    
+    glBegin(GL_TRIANGLES);                      // sugár 2.
+    glColor3f(1.0, 1.0, 0.0);
+    
+    glVertex2f(-0.85, 0.8);
+    glVertex2f(-0.5, 0.65);
+    glVertex2f(-0.6, 0.6);
+    
+    glEnd();
+    
+    glBegin(GL_TRIANGLES);                      // sugár 3.
+    glColor3f(1.0, 1.0, 0.0);
+    
+    glVertex2f(-0.95, 0.63);
+    glVertex2f(-0.75, 0.45);
+    glVertex2f(-0.85, 0.43);
     
     glEnd();
     
@@ -342,12 +372,37 @@ void onDisplay( ) {
     glEnd();
     
     
-    drawBird(-1.0, -0.7, birdPositionY, 0.5, 1.0, 0.2);
-    drawBird(1.0, -0.33, -0.25, 1.0, 0.0, 0.0);
+    green->drawBird(-1.0, 0.5, 1.0, 0.2);
+    red->drawBird(1.0, 1.0, 0.0, 0.0);
+    
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0, 0.0);
+    
+    glVertex2f(trans_x(0.0),trans_y(0.75));
+    glVertex2f(trans_x(0.6),trans_y(0.7));
+    glVertex2f(trans_x(0.6),trans_y(0.75));
+    glVertex2f(trans_x(0.0),trans_y(0.7));
+    
+    glEnd();
     
     glPointSize(5.0);
     glBegin(GL_POINTS);
-    glColor3d(1,0,0);
+    glColor3d(1,1,1);
+    
+    glVertex2f(trans_x(0.06),trans_y(0.73));
+    
+    glEnd();
+    
+    glBegin(GL_POINTS);
+    glColor3d(1,1,1);
+    
+    glVertex2f(trans_x(0.54),trans_y(0.73));
+    
+    glEnd();
+    
+    glBegin(GL_POINTS);
+    glColor3d(1,1,0);
+    
     glVertex2f(-1.0/3.0, -1.0/3.0);
     
     glEnd();
@@ -389,8 +444,7 @@ void onIdle( ){
     
     if(time % 1 == 0) time_slow++;
 
-    
-    getGreenBirdYForTime(time_slow);
+    green->getGreenBirdYForTime(time_slow);
     
     glutPostRedisplay( );
   
