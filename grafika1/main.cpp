@@ -132,7 +132,11 @@ void onInitialization( ) {
 		image[Y*screenWidth + X] = Color(0.12,0.45,1);
     
 }
-    
+
+float birdPositionX = 0;
+float birdPositionY = 0;
+long time_slow = 0;
+
 class Bird{
     
     double x;
@@ -152,24 +156,15 @@ public:
     }
         
     double getGreenBirdYForTime(float time){
-        return time;
+        float rad = time / 180.0 * 3.14;
+        
+        return sin(rad);
     }
         
     double getGreenBirdXForTime(float time){
         return time;
     }
         
-  
-        
-    void drawGreenBird(){
-        
-            
-        glPointSize(5.0);
-        glBegin(GL_POINTS);
-        glColor3d(1,1,1);
-        glVertex2d(x,y);
-        glEnd();
-    }
         
 };
 
@@ -188,21 +183,19 @@ double trans_y(float y){
 return y;
 }
 
-void drawBird(double x, double y, float R, float G, float B){
+
+void drawBird(float c, float x, float y, float R, float G, float B){
     
     
     
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(R, G, B);
     
-    x = x + 0.7;
-    y = y + 0.4;
-    
     
     
     for(int i = 0; i < 360; i++){
         float rad = i / 180.0 * 3.14;
-        glVertex2f(cos(rad) * 0.07 + x, sin(rad) * 0.09 - 0.4 + y);
+        glVertex2f(cos(rad) * 0.08 + c * x, sin(rad) * 0.1 + y);
     }
     glEnd();
     
@@ -213,7 +206,7 @@ void drawBird(double x, double y, float R, float G, float B){
     
     for(int i = 0; i < 360; i++){
         float rad = i / 180.0 * 3.14;
-        glVertex2f(cos(rad) * 0.025 - 0.03 + x, sin(rad) * 0.035 - 0.37 + y);
+        glVertex2f(cos(rad) * 0.033 + c * (0.036 + x), sin(rad) * 0.05 + 0.02 + y);
     }
     glEnd();
     
@@ -224,21 +217,75 @@ void drawBird(double x, double y, float R, float G, float B){
     
     for(int i = 0; i < 360; i++){
         float rad = i / 180.0 * 3.14;
-        glVertex2f(cos(rad) * 0.02 - 0.032 + x, sin(rad) * 0.015 - 0.365 + y);
+        glVertex2f(cos(rad) * 0.015 + c * (0.05 + x), sin(rad) * 0.025 + 0.01 + y);
     }
+    glEnd();
+    
+    
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.85, 0.75, 0.2);
+    
+    glVertex2f(c * (0.12 + x), -0.05 + y);
+    glVertex2f(c * (0.06 + x), -0.07 + y);
+    glVertex2f(c * (0.08 + x), -0.005 + y);
+    
+    glEnd();
+    
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.0, 0.0, 0.0);
+    
+    glVertex2f(c * (0.09 + x), 0.04 + y);
+    glVertex2f(c * (0.04 + x), 0.11 + y);
+    glVertex2f(c * (-0.02 + x), 0.13 + y);
+    
+    glEnd();
+    
+    
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0, 1.0, 0.0);
+    
+    glVertex2f(c * (-0.06 + x), -0.06 + y);
+    glVertex2f(c * (-0.12 + x), -0.02 + y);
+    glVertex2f(c * (-0.14 + x), -0.03 + y);
+    
+    glEnd();
+    
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0, 1.0, 0.0);
+    
+    glVertex2f(c * (-0.06 + x), -0.06 + y);
+    glVertex2f(c * (-0.11 + x), -0.07 + y);
+    glVertex2f(c * (-0.13 + x), -0.05 + y);
+    
+    glEnd();
+    
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0, 1.0, 0.0);
+    
+    glVertex2f(c * (-0.06 + x), -0.06 + y);
+    glVertex2f(c * (-0.1 + x), -0.1 + y);
+    glVertex2f(c * (-0.1 + x), -0.08 + y);
+    
     glEnd();
     
     glBegin(GL_TRIANGLES);
     glColor3f(0.85, 0.75, 0.2);
     
-    glVertex2f(0.58, -0.02);
-    glVertex2f(0.64, -0.05);
-    glVertex2f(0.63, 0.015);
+    glVertex2f(c * (-0.07 + x), 0.0 + y);
+    glVertex2f(c * (-0.02 + x), -0.07 + y);
+    glVertex2f(c * (0.02 + x), -0.05 + y);
     
     glEnd();
     
 }
 
+void getGreenBirdYForTime(float time){
+
+    float rad = time / 180.0 * 3.14;
+    
+    birdPositionY = sin(rad)/2.0;
+    
+}
 
 
 // Rajzolas, ha az alkalmazas ablak ervenytelenne valik, akkor ez a fuggveny hivodik meg
@@ -294,14 +341,16 @@ void onDisplay( ) {
     
     glEnd();
     
+    
+    drawBird(-1.0, -0.7, birdPositionY, 0.5, 1.0, 0.2);
+    drawBird(1.0, -0.33, -0.25, 1.0, 0.0, 0.0);
+    
     glPointSize(5.0);
     glBegin(GL_POINTS);
-    glColor3d(1,1,1);
+    glColor3d(1,0,0);
     glVertex2f(-1.0/3.0, -1.0/3.0);
     
     glEnd();
-    
-    drawBird(0.0, 0.0, 0.5, 1.0, 0.2);
     
     // ... 
     
@@ -324,7 +373,8 @@ void onKeyboardUp(unsigned char key, int x, int y) {
 // Eger esemenyeket lekezelo fuggveny
 void onMouse(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)   // A GLUT_LEFT_BUTTON / GLUT_RIGHT_BUTTON illetve GLUT_DOWN / GLUT_UP
-		glutPostRedisplay( ); 						 // Ilyenkor rajzold ujra a kepet
+        
+        glutPostRedisplay( );           // Ilyenkor rajzold ujra a kepet
 }
 
 // Eger mozgast lekezelo fuggveny
@@ -337,6 +387,13 @@ void onMouseMotion(int x, int y){
 void onIdle( ){
     long time = glutGet(GLUT_ELAPSED_TIME);     // program inditasa ota eltelt ido
     
+    if(time % 1 == 0) time_slow++;
+
+    
+    getGreenBirdYForTime(time_slow);
+    
+    glutPostRedisplay( );
+  
 }
 
 // ...Idaig modosithatod
