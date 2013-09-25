@@ -129,9 +129,117 @@ void onInitialization( ) {
     // Peldakent keszitunk egy kepet az operativ memoriaba
     for(int Y = 0; Y < screenHeight; Y++)
 		for(int X = 0; X < screenWidth; X++)
-		image[Y*screenWidth + X] = Color(0,0.3,1);
+		image[Y*screenWidth + X] = Color(0.12,0.45,1);
     
 }
+    
+class Bird{
+    
+    double x;
+    double y;
+    
+public:
+    Bird();
+    
+    void drawBird(double x, double y, float R, float G, float B){
+        
+        for(int i = 0; i < 360; i++){
+            float rad = i / 180.0 * 3.14;
+            glVertex2f(cos(rad) * 0.1, sin(rad) * 0.1 - 1);
+        }
+        glEnd();
+    
+    }
+        
+    double getGreenBirdYForTime(float time){
+        return time;
+    }
+        
+    double getGreenBirdXForTime(float time){
+        return time;
+    }
+        
+  
+        
+    void drawGreenBird(){
+        
+            
+        glPointSize(5.0);
+        glBegin(GL_POINTS);
+        glColor3d(1,1,1);
+        glVertex2d(x,y);
+        glEnd();
+    }
+        
+};
+
+
+double trans_x(float x){
+    float a = 1.0/3.0 + 0.1/3.0;
+    x = -(1 - (x+a));
+    
+return x;
+}
+
+double trans_y(float y){
+    float b = 0.1/3.0;
+    y = -(1 - y + b + 0.05);
+    
+return y;
+}
+
+void drawBird(double x, double y, float R, float G, float B){
+    
+    
+    
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3f(R, G, B);
+    
+    x = x + 0.7;
+    y = y + 0.4;
+    
+    
+    
+    for(int i = 0; i < 360; i++){
+        float rad = i / 180.0 * 3.14;
+        glVertex2f(cos(rad) * 0.07 + x, sin(rad) * 0.09 - 0.4 + y);
+    }
+    glEnd();
+    
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3f(1, 1, 1);
+    
+    
+    
+    for(int i = 0; i < 360; i++){
+        float rad = i / 180.0 * 3.14;
+        glVertex2f(cos(rad) * 0.025 - 0.03 + x, sin(rad) * 0.035 - 0.37 + y);
+    }
+    glEnd();
+    
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3f(0.0, 0.0, 0.0);
+    
+    
+    
+    for(int i = 0; i < 360; i++){
+        float rad = i / 180.0 * 3.14;
+        glVertex2f(cos(rad) * 0.02 - 0.032 + x, sin(rad) * 0.015 - 0.365 + y);
+    }
+    glEnd();
+    
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.85, 0.75, 0.2);
+    
+    glVertex2f(0.58, -0.02);
+    glVertex2f(0.64, -0.05);
+    glVertex2f(0.63, 0.015);
+    
+    glEnd();
+    
+}
+
+
 
 // Rajzolas, ha az alkalmazas ablak ervenytelenne valik, akkor ez a fuggveny hivodik meg
 void onDisplay( ) {
@@ -139,6 +247,7 @@ void onDisplay( ) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // kepernyo torles
     
     // ..
+    
     
     // Peldakent atmasoljuk a kepet a rasztertarba
     glDrawPixels(screenWidth, screenHeight, GL_RGB, GL_FLOAT, image);
@@ -149,60 +258,57 @@ void onDisplay( ) {
     //glVertex2f( 0.5f, -0.5f);
     //glVertex2f( 0.0f,  0.5f);
     
-    
-    glBegin(GL_POLYGON);
-    glColor3f(0.7, 0.5, 0.25);
-    
-
-    glVertex2f( 0.225, 0.0);
-    glVertex2f( 0.375, 0.0);
-    glVertex2f( 0.375, 0.5);      // 1. szár
-    glVertex2f( 0.6, 0.8);      // 1. oldalág
-    glVertex2f( 0.55, 0.8);
-    glVertex2f( 0.3, 0.4);      // középpont
-        
-    glEnd();
-    
-    glBegin(GL_POLYGON);
-    glColor3f(0.7, 0.5, 0.25);
-    
-    glVertex2f( 0.375, 0.0);
-    glVertex2f( 0.225, 0.0);      // 2. szár
-    glVertex2f( 0.225, 0.5);
-    glVertex2f( 0.3, 0.4);
-    glVertex2f( 0.05, 0.8);     // 2. oldalág
-    glVertex2f( 0.0, 0.8);
-    
-    glEnd();
-    
-    
-        
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(0, 1, 0.3);
-        
+    
     for(int i=0;i<360;i++){
         float rad = i/180.0*3.14;
-        glVertex2f(cos(rad)*1.5, sin(rad)*0.6-1);
+        glVertex2f(cos(rad)*1.5, sin(rad)*0.6-1.3);
     }
+    
+    glEnd();
+    
+
+    
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.5, 0.25);
+    
+    glVertex2f( trans_x(0.225), trans_y(0.12));
+    glVertex2f( trans_x(0.375), trans_y(0.12));
+    glVertex2f( trans_x(0.375), trans_y(0.5));    // 1. szár
+    glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalág
+    glVertex2f( trans_x(0.55), trans_y(0.8));
+    glVertex2f( trans_x(0.3), trans_y(0.45));     // középpont
         
     glEnd();
     
-    // ...
+    glBegin(GL_POLYGON);
+    glColor3f(0.7, 0.5, 0.25);
+    
+    glVertex2f( trans_x(0.375), trans_y(0.12));
+    glVertex2f( trans_x(0.225), trans_y(0.12));         // 2. szár
+    glVertex2f( trans_x(0.225), trans_y(0.5));
+    glVertex2f( trans_x(0.3), trans_y(0.45));
+    glVertex2f( trans_x(0.05), trans_y(0.8));           // 2. oldalág
+    glVertex2f( trans_x(0.0), trans_y(0.8));
+    
+    glEnd();
+    
+    glPointSize(5.0);
+    glBegin(GL_POINTS);
+    glColor3d(1,1,1);
+    glVertex2f(-1.0/3.0, -1.0/3.0);
+    
+    glEnd();
+    
+    drawBird(0.0, 0.0, 0.5, 1.0, 0.2);
+    
+    // ... 
     
     glutSwapBuffers();     				// Buffercsere: rajzolas vege
     
 }
 
-class greenBird{
-    int x;
-    int y;
-public:
-    greenBird();
-    
-    float flyingRout();
-
-
-};
 
 // Billentyuzet esemenyeket lekezelo fuggveny (lenyomas)
 void onKeyboard(unsigned char key, int x, int y) {
@@ -226,9 +332,10 @@ void onMouseMotion(int x, int y){
     
 }
 
+
 // `Idle' esemenykezelo, jelzi, hogy az ido telik, az Idle esemenyek frekvenciajara csak a 0 a garantalt minimalis ertek
-void onIdle( ) {
-    long time = glutGet(GLUT_ELAPSED_TIME);		// program inditasa ota eltelt ido
+void onIdle( ){
+    long time = glutGet(GLUT_ELAPSED_TIME);     // program inditasa ota eltelt ido
     
 }
 
