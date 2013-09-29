@@ -139,6 +139,9 @@ long time_slow = 0;
 long time_slower = 0;
 float mouse_motion_x = 0.0;
 float mouse_motion_y = 0.0;
+int button_released = 0;
+int bird_reborn_x = 0;
+int bird_reborn_y = 0;
 
 class Bird{
 protected:
@@ -161,18 +164,20 @@ public:
     
     float Get_y_starter(){ return y_starter; }
     
-    void drawBird(float c, float R, float G, float B){
+    void drawBird(float c, float r, float R, float G, float B){
         
+        if(x > 1.0 || x < -1.0 || y > 1.0 || y < -1.0){
+            x = y = button_released = mouse_motion_x = mouse_motion_y = 0.0;
+            bird_reborn_x = bird_reborn_y = 1;
+        }
         
         
         glBegin(GL_TRIANGLE_FAN);                   // test
         glColor3f(R, G, B);
         
-        
-        
         for(int i = 0; i < 360; i++){
             float rad = i / 180.0 * 3.14;
-            glVertex2f(cos(rad) * 0.08 + c * x, sin(rad) * 0.1 + y);
+            glVertex2f(cos(rad) * 0.08 + c * x, r * (sin(rad) * 0.1 + y));
         }
         glEnd();
         
@@ -183,7 +188,7 @@ public:
         
         for(int i = 0; i < 360; i++){
             float rad = i / 180.0 * 3.14;
-            glVertex2f(cos(rad) * 0.033 + c * (0.036 + x), sin(rad) * 0.05 + 0.02 + y);
+            glVertex2f(cos(rad) * 0.033 + c * (0.036 + x), r * (sin(rad) * 0.05 + 0.02 + y));
         }
         glEnd();
         
@@ -194,7 +199,7 @@ public:
         
         for(int i = 0; i < 360; i++){
             float rad = i / 180.0 * 3.14;
-            glVertex2f(cos(rad) * 0.015 + c * (0.05 + x), sin(rad) * 0.025 + 0.01 + y);
+            glVertex2f(cos(rad) * 0.015 + c * (0.05 + x), r * (sin(rad) * 0.025 + 0.01 + y));
         }
         glEnd();
         
@@ -202,9 +207,9 @@ public:
         glBegin(GL_TRIANGLES);                      // csőr
         glColor3f(0.85, 0.75, 0.2);
         
-        glVertex2f(c * (0.12 + x), -0.05 + y);
-        glVertex2f(c * (0.06 + x), -0.07 + y);
-        glVertex2f(c * (0.08 + x), -0.005 + y);
+        glVertex2f(c * (0.12 + x), r * (-0.04 + y));
+        glVertex2f(c * (0.06 + x), r * (-0.07 + y));
+        glVertex2f(c * (0.08 + x), r * (-0.005 + y));
         
         glEnd();
         
@@ -212,9 +217,9 @@ public:
         glBegin(GL_TRIANGLES);                      // szemöldök
         glColor3f(0.0, 0.0, 0.0);
         
-        glVertex2f(c * (0.09 + x), 0.04 + y);
-        glVertex2f(c * (0.04 + x), 0.11 + y);
-        glVertex2f(c * (-0.02 + x), 0.13 + y);
+        glVertex2f(c * (0.09 + x), r * (0.04 + y));
+        glVertex2f(c * (0.04 + x), r * (0.11 + y));
+        glVertex2f(c * (-0.02 + x), r * (0.13 + y));
         
         glEnd();
         
@@ -222,36 +227,36 @@ public:
         glBegin(GL_TRIANGLES);                      // farok toll 1.
         glColor3f(1.0, 1.0, 0.0);
         
-        glVertex2f(c * (-0.06 + x), -0.06 + y);
-        glVertex2f(c * (-0.12 + x), -0.02 + y);
-        glVertex2f(c * (-0.14 + x), -0.03 + y);
+        glVertex2f(c * (-0.06 + x), r * (-0.06 + y));
+        glVertex2f(c * (-0.12 + x), r * (-0.02 + y));
+        glVertex2f(c * (-0.14 + x), r * (-0.03 + y));
         
         glEnd();
         
         glBegin(GL_TRIANGLES);                      // farok toll 2.
         glColor3f(1.0, 1.0, 0.0);
         
-        glVertex2f(c * (-0.06 + x), -0.06 + y);
-        glVertex2f(c * (-0.11 + x), -0.07 + y);
-        glVertex2f(c * (-0.13 + x), -0.05 + y);
+        glVertex2f(c * (-0.06 + x), r * (-0.06 + y));
+        glVertex2f(c * (-0.11 + x), r * (-0.07 + y));
+        glVertex2f(c * (-0.13 + x), r * (-0.05 + y));
         
         glEnd();
         
         glBegin(GL_TRIANGLES);                      // farok toll 3.
         glColor3f(1.0, 1.0, 0.0);
         
-        glVertex2f(c * (-0.06 + x), -0.06 + y);
-        glVertex2f(c * (-0.1 + x), -0.1 + y);
-        glVertex2f(c * (-0.1 + x), -0.08 + y);
+        glVertex2f(c * (-0.06 + x), r * (-0.06 + y));
+        glVertex2f(c * (-0.1 + x), r * (-0.1 + y));
+        glVertex2f(c * (-0.1 + x), r * (-0.08 + y));
         
         glEnd();
         
         glBegin(GL_TRIANGLES);                      // szárny
         glColor3f(0.85, 0.75, 0.2);
         
-        glVertex2f(c * (-0.07 + x), 0.0 + y);
-        glVertex2f(c * (-0.02 + x), -0.07 + y);
-        glVertex2f(c * (0.02 + x), -0.05 + y);
+        glVertex2f(c * (-0.07 + x), r * (0.0 + y));
+        glVertex2f(c * (-0.02 + x), r * (-0.07 + y));
+        glVertex2f(c * (0.02 + x), r * (-0.05 + y));
         
         glEnd();
         
@@ -275,8 +280,10 @@ public:
 
 };
 
-float v0 = 0.1;
+float v0 = 0.001;
 int button_pushed = 0;
+long g = 10;
+greenBird green = greenBird(-0.7, 0.0);
 
 class redBird : public Bird{
     
@@ -284,47 +291,67 @@ class redBird : public Bird{
 public:
     redBird(float x, float y):Bird(x, y){}
     
-    void getRedBirdXForTime(float time){
+    void getRedBirdXForTime(long time, long start_time){
         Vector v_force(-mouse_motion_x, -mouse_motion_y);
+        long actual_time = (time - start_time) + 1;
         
-        x = x_starter + mouse_motion_x; //v0 * time * (y/v_force.Length());
-        
+        if(button_released == 1){
+            
+            x = x - mouse_motion_x * actual_time * 0.05;
+            
+        } else if(bird_reborn_x == 1){
+                    x = x_starter;
+                    bird_reborn_x = 0;
+                } else x = x_starter + mouse_motion_x;
     }
     
-    void getRedBirdYForTime(float time){
+    void getRedBirdYForTime(long time, long start_time){
         Vector v_force(-mouse_motion_x, -mouse_motion_y);
+
+        long actual_time = (time - start_time) + 1;
         
-        
-        y = y_starter + mouse_motion_y; //v0 * time * (x/v_force.Length());
-        
+        if(button_released == 1){
+            
+            float gravity = (float)g/2 * (float)actual_time*actual_time * 0.0005;
+            y = y - mouse_motion_y * (float)actual_time * 0.05 - gravity;
+            
+        } else if(bird_reborn_y == 1){
+                    y = y_starter;
+                    bird_reborn_y = 0;
+                } else y = y_starter + mouse_motion_y;
     }
     
     bool isPointInBird(float px, float py){
         float distance_1 = 0.0;                                  //illetveGLUT_DOWN / GLUT_UP
         float distance_2 = 0.0;
         
-        float distance_xes = x - ((float)px - 300)/300.0;
-        float distance_ys = y - (300 - (float)py)/300.0;
+        distance_1 = sqrtf(px * px + py * py);
         
+        float Alpha = asin(py/distance_1);
         
-        distance_1 = sqrtf(distance_xes * distance_xes +
-                           distance_ys * distance_ys);
-        cout << "kozeppont es kurzor tavolsaga: " << distance_1 << endl;
+        float elips_x = cos(Alpha) * 0.08 + x;
+        float elips_y = sin(Alpha) * 0.1 + y;
         
-        float Alpha = asin(distance_ys/distance_1);
-        
-        float center_x = cos(Alpha) * 0.08 + x;
-        float center_y = sin(Alpha) * 0.1 + y;
-        
-        distance_2 = sqrtf((x - center_x) * (x - center_x) +
-                           (y - center_y) * (y - center_y));
-        cout << "kozeppont es elipszispont tavolsaga: " << distance_2 << endl;
+        distance_2 = sqrtf((x - elips_x) * (x - elips_x) + (y - elips_y) * (y - elips_y));
         
         if(distance_1 < distance_2) return true;
         else    return false;
-    
-        
     }
+    
+    bool hitGreenBird(float center_x, float center_y){
+        
+        cout << center_y << endl;
+        
+        for(int angle = 360; angle >= 0; --angle){
+            float rad = (float)angle/180.0 * 3.14;
+            float point_x = cos(rad) * 0.08 - center_x;
+            float point_y = sin(rad) * 0.1 + center_y;
+            
+            if(isPointInBird(point_x, point_y))  return true;
+        }
+        return false;
+    }
+    
 };
 
 
@@ -342,11 +369,11 @@ double trans_y(float y){
 return y;
 }
 
-redBird red = redBird(-0.33, -0.23);
-greenBird green = greenBird(-0.7, 0.0);
-greenBird g2 = greenBird(-0.2, 0.1);
+redBird red = redBird(-0.33, -0.28);
+
 float rubber_movement_y = -0.02;
 float rubber_movement_x = 0.0;
+long start_time = 0.0;
 
 
 
@@ -413,7 +440,6 @@ void onDisplay( ) {
     glVertex2f(-0.85, 0.43);
     
     glEnd();
-    
 
     
     glBegin(GL_POLYGON);
@@ -441,26 +467,106 @@ void onDisplay( ) {
     glEnd();
     
     
-    green.drawBird(-1.0, 0.5, 1.0, 0.2);
-    red.drawBird(1.0, 1.0, 0.0, 0.0);
-    g2.drawBird(-1.0, 0.5, 1.0, 0.2);
+    green.drawBird(-1.0, 1.0, 0.5, 1.0, 0.2);
     
     green.getGreenBirdYForTime(time_slow);
-    g2.getGreenBirdYForTime(time_slow +50);
-    red.getRedBirdXForTime(time_slower);
-    red.getRedBirdYForTime(time_slower);
+    red.getRedBirdYForTime(time_slow/10.0, start_time);
+    red.getRedBirdXForTime(time_slow/10.0, start_time);
     
     glutPostRedisplay( );
     
     glBegin(GL_TRIANGLE_STRIP);                     // gumi kötél
-    glColor3f(0.0, 0.0, 0.2);
+    glColor3f(0.0, 0.0, 0.0);
     
     glVertex2f(trans_x(0.12),trans_y(0.7));
     glVertex2f(trans_x(0.14),trans_y(0.65));
-    glVertex2f(-1.0/3.0 -rubber_movement_x, -1.0/3.0 -rubber_movement_y);
-    glVertex2f(-1.0/3.0 -rubber_movement_x, -1.0/3.0 - 0.05 -rubber_movement_y);
-    glVertex2f(trans_x(0.58),trans_y(0.75));
-    glVertex2f(trans_x(0.56),trans_y(0.7));
+    if(button_released == 1){
+    
+        glVertex2f(-1.0/3.0 - 0.07, - 1.0/3.0 - 0.012);
+        glVertex2f(-1.0/3.0 - 0.02, - 1.0/3.0 - 0.055);
+            
+    }   else{
+        glVertex2f(-1.0/3.0 + mouse_motion_x - 0.07, -1.0/3.0 + mouse_motion_y -0.012);
+        glVertex2f(-1.0/3.0 + mouse_motion_x - 0.02, -1.0/3.0 + mouse_motion_y -0.055);
+    }
+    
+    glEnd();
+    
+    if(button_released == 1){
+        
+        glBegin(GL_POLYGON);
+        glColor3f(0.7, 0.5, 0.25);
+        
+        glVertex2f( trans_x(0.28), trans_y(0.12));
+        glVertex2f( trans_x(0.38), trans_y(0.12));
+        glVertex2f( trans_x(0.4), trans_y(0.5));    // 1. szár
+        glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalág
+        glVertex2f( trans_x(0.45), trans_y(0.8));
+        glVertex2f( trans_x(0.31), trans_y(0.45));     // középpont
+        
+        glEnd();
+        
+        glBegin(GL_TRIANGLE_STRIP);                     // gumi kötél
+        glColor3f(0.0, 0.0, 0.0);
+        
+        glVertex2f(-1.0/3.0 - 0.07, - 1.0/3.0 - 0.012);
+        glVertex2f(-1.0/3.0 - 0.02, - 1.0/3.0 - 0.055);
+        glVertex2f(trans_x(0.58), trans_y(0.75));
+        glVertex2f(trans_x(0.56), trans_y(0.7));
+        
+        glEnd();
+        
+    }
+    
+    if(red.hitGreenBird(green.Get_x(), green.Get_y())){
+        red.drawBird(0.0, 1.0, 1.0, 1.0, 0.0);
+        mouse_motion_x = mouse_motion_y = 0.0;
+    
+    }
+    else if(bird_reborn_x == 1)
+            red.drawBird(1.0, -1.0, 1.0, 0.0, 0.0);
+            else
+                red.drawBird(1.0, 1.0, 1.0, 0.0, 0.0);
+
+    
+    if(button_released == 0){
+    
+        glBegin(GL_POLYGON);
+        glColor3f(0.7, 0.5, 0.25);
+    
+        glVertex2f( trans_x(0.28), trans_y(0.12));
+        glVertex2f( trans_x(0.38), trans_y(0.12));
+        glVertex2f( trans_x(0.4), trans_y(0.5));    // 1. szár
+        glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalág
+        glVertex2f( trans_x(0.45), trans_y(0.8));
+        glVertex2f( trans_x(0.31), trans_y(0.45));     // középpont
+    
+        glEnd();
+    
+    
+        
+        glBegin(GL_TRIANGLE_STRIP);                     // gumi kötél
+        glColor3f(0.0, 0.0, 0.0);
+        
+        glVertex2f(-1.0/3.0 + mouse_motion_x - 0.07, -1.0/3.0 + mouse_motion_y -0.012);
+        glVertex2f(-1.0/3.0 + mouse_motion_x - 0.02, -1.0/3.0 + mouse_motion_y -0.055);
+        glVertex2f(trans_x(0.58),trans_y(0.75));
+        glVertex2f(trans_x(0.56),trans_y(0.7));
+    
+        glEnd();
+    }
+    
+    glPointSize(2.0);
+    glBegin(GL_POINTS);
+    glColor3d(1,1,1);
+    
+    for(int angle = 360; angle >= 0; --angle){
+        float rad = (float)angle/180.0 * 3.14;
+        float point_x = cos(rad) * 0.08 - green.Get_x();
+        float point_y = sin(rad) * 0.1 + green.Get_y();
+        
+        glVertex2f(point_x,point_y);
+    }
     
     glEnd();
     
@@ -468,7 +574,7 @@ void onDisplay( ) {
     glBegin(GL_POINTS);
     glColor3d(1,1,1);
     
-    //glVertex2f(trans_x(0.13),trans_y(0.67));
+    glVertex2f(-green.Get_x(),green.Get_y());
     
     glEnd();
     
@@ -485,6 +591,7 @@ void onDisplay( ) {
     //glVertex2f(-1.0/3.0, -1.0/3.0);
    
     glEnd();
+    
     
     // ... 
     
@@ -507,10 +614,19 @@ void onKeyboardUp(unsigned char key, int x, int y) {
 // Eger esemenyeket lekezelo fuggveny
 void onMouse(int button, int state, int x, int y) {
     
+    float tx = red.Get_x() - ((float)x - 300)/300.0;
+    float ty = red.Get_y() - (300 - (float)y)/300.0;
+    
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){   // A GLUT_LEFT_BUTTON / GLUT_RIGHT_BUTTON
-        button_pushed = 1;
+        if(red.isPointInBird(tx, ty))
+            button_pushed = 1;
         
-    }   else button_pushed = 0;
+    }   else if (button_pushed == 1 ){
+        
+                    button_released = 1;
+                    start_time = time_slow/10;
+    
+                }else button_pushed = 0;
     
     glutPostRedisplay( );               // Ilyenkor rajzold ujra a kepet
 }
@@ -518,10 +634,11 @@ void onMouse(int button, int state, int x, int y) {
 // Eger mozgast lekezelo fuggveny
 void onMouseMotion(int x, int y){
     
-    if (button_pushed == 1 && red.isPointInBird(x, y)){
-        mouse_motion_x = ((float)x - 300)/300.0 - red.Get_x_starter();
-        mouse_motion_y = (300 - (float)y)/300.0 - red.Get_y_starter();
-    } 
+    if (button_pushed == 1 ){
+        
+            mouse_motion_x = ((float)x - 300)/300.0 - red.Get_x_starter();
+            mouse_motion_y = (300 - (float)y)/300.0 - red.Get_y_starter();
+    }
 }
 
 
@@ -530,7 +647,7 @@ void onIdle( ){
     long time = glutGet(GLUT_ELAPSED_TIME);     // program inditasa ota eltelt ido
     
     if(time % 1 == 0) time_slow++;
-    if(time % 10 == 0) time_slower++;
+    if(time % 20 == 0) time_slower++;
   
 }
 
