@@ -509,14 +509,14 @@ void onDisplay( ) {
         if(bird_reborn_x == 1){
             green.getGreenBirdYForTime(time_slow);
             red.drawBird(1.0, -1.0, 1.0, 0.0, 0.0);
-            red.getRedBirdXForTime(time_slow/20, start_time);
-            red.getRedBirdYForTime(time_slow/20, start_time);
+            red.getRedBirdXForTime(time_slow/22, start_time);
+            red.getRedBirdYForTime(time_slow/22, start_time);
             
         } else{
             green.getGreenBirdYForTime(time_slow);
             red.drawBird(1.0, 1.0, 1.0, 0.0, 0.0);
-            red.getRedBirdXForTime(time_slow/20, start_time);
-            red.getRedBirdYForTime(time_slow/20, start_time);
+            red.getRedBirdXForTime(time_slow/22, start_time);
+            red.getRedBirdYForTime(time_slow/22, start_time);
             
         }
     } else if(bird_reborn_x == 1){
@@ -583,15 +583,18 @@ void onMouse(int button, int state, int x, int y) {
     float ty =(300 - (float)y)/300.0;
     
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){   // A GLUT_LEFT_BUTTON / GLUT_RIGHT_BUTTON
-        if(red.isPointInBird(tx, ty))                         //illetveGLUT_DOWN / GLUT_UP
+        if(red.isPointInBird(tx, ty)){                         //illetveGLUT_DOWN / GLUT_UP
             button_pushed = 1;
+            button_released = 0;
+        } else button_pushed = 0;
         
-    }   else if (button_pushed == 1 ){
+    } else if (button_pushed == 1 ){
         
                     button_released = 1;
-                    start_time = time_slow/20;
+                    button_pushed = 0;
+                    start_time = time_slow/22;
     
-                }else button_pushed = 0;
+                }
     
     glutPostRedisplay( );               // Ilyenkor rajzold ujra a kepet
 }
@@ -599,7 +602,7 @@ void onMouse(int button, int state, int x, int y) {
 // Eger mozgast lekezelo fuggveny
 void onMouseMotion(int x, int y){
     
-    if (button_pushed == 1 ){
+    if (button_pushed == 1){
         
         if(stop == 1){
             mouse_motion_x = ((float)x - 300)/300.0 - red.Get_x_starter();
