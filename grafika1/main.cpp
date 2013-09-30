@@ -148,10 +148,10 @@ int stop = 1;
 class Bird{
 protected:
     
-    float x = 0.0;
-    float y = 0.0;
-    float x_starter = 0.0;
-    float y_starter = 0.0;
+    float x;
+    float y;
+    float x_starter;
+    float y_starter;
     
 public:
     Bird(){}
