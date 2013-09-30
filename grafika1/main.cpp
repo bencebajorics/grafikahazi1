@@ -43,7 +43,6 @@
 
 #include <math.h>
 #include <stdlib.h>
-#include <iostream>
 
 #if defined(__APPLE__)
 #include <OpenGL/gl.h>
@@ -58,7 +57,6 @@
 #include <GL/glut.h>
 #endif
 
-using namespace std;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Innentol modosithatod...
@@ -136,7 +134,8 @@ void onInitialization( ) {
 }
 
 long time_slow = 0;
-long time_slower = 0;
+long start_time = 0.0;
+long g = 10;
 float mouse_motion_x = 0.0;
 float mouse_motion_y = 0.0;
 int button_released = 0;
@@ -285,9 +284,6 @@ public:
 
 };
 
-float v0 = 0.001;
-long g = 10;
-greenBird green = greenBird(-0.7, 0.0);
 
 class redBird : public Bird{
     
@@ -297,7 +293,7 @@ public:
     
     void getRedBirdXForTime(long time, long start_time){
 
-        long actual_time = (time - start_time) + 1;
+        long actual_time = (time - start_time) + 1 * stop;
         
         if(button_released == 1){
             
@@ -331,7 +327,7 @@ public:
     }
     
     bool isPointInBird(float px, float py){
-        float distance_1 = 0.0;                                  //illetveGLUT_DOWN / GLUT_UP
+        float distance_1 = 0.0;                                
         float distance_2 = 0.0;
         
         float dx = x - px;
@@ -351,8 +347,6 @@ public:
     }
     
     bool hitGreenBird(float center_x, float center_y){
-        
-        cout << center_y << endl;
         
         for(int angle = 0; angle <= 360; ++angle){
             float rad = (float)angle/180.0 * 3.14;
@@ -382,12 +376,7 @@ return y;
 }
 
 redBird red = redBird(-0.33, -0.28);
-
-float rubber_movement_y = -0.02;
-float rubber_movement_x = 0.0;
-long start_time = 0.0;
-
-
+greenBird green = greenBird(-0.7, 0.0);
 
 // Rajzolas, ha az alkalmazas ablak ervenytelenne valik, akkor ez a fuggveny hivodik meg
 void onDisplay( ) {
@@ -396,15 +385,8 @@ void onDisplay( ) {
     
     // ..
     
-    
     // Peldakent atmasoljuk a kepet a rasztertarba
     glDrawPixels(screenWidth, screenHeight, GL_RGB, GL_FLOAT, image);
-    // Majd rajzolunk egy kek haromszoget
-	//glColor3f(0, 0, 1);
-	//glBegin(GL_TRIANGLES);
-    //glVertex2f(-1.5f, -0.5f);
-    //glVertex2f( 0.5f, -0.5f);
-    //glVertex2f( 0.0f,  0.5f);
     
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(0, 1, 0.3);
@@ -416,7 +398,7 @@ void onDisplay( ) {
     
     glEnd();
     
-    glBegin(GL_TRIANGLE_FAN);               // napocska :)
+    glBegin(GL_TRIANGLE_FAN);               // nap
     glColor3f(1.0, 1.0, 0.0);
     
     for(int i=0;i<360;i++){
@@ -459,10 +441,10 @@ void onDisplay( ) {
     
     glVertex2f( trans_x(0.28), trans_y(0.12));
     glVertex2f( trans_x(0.38), trans_y(0.12));
-    glVertex2f( trans_x(0.4), trans_y(0.5));    // 1. szár
-    glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalág
+    glVertex2f( trans_x(0.4), trans_y(0.5));        // 1. szár
+    glVertex2f( trans_x(0.6), trans_y(0.8));        // 1. oldalág
     glVertex2f( trans_x(0.45), trans_y(0.8));
-    glVertex2f( trans_x(0.31), trans_y(0.45));     // középpont
+    glVertex2f( trans_x(0.31), trans_y(0.45));      // középpont
         
     glEnd();
     
@@ -470,7 +452,7 @@ void onDisplay( ) {
     glColor3f(0.7, 0.5, 0.25);
     
     glVertex2f( trans_x(0.37), trans_y(0.12));
-    glVertex2f( trans_x(0.28), trans_y(0.12));         // 2. szár
+    glVertex2f( trans_x(0.28), trans_y(0.12));          // 2. szár
     glVertex2f( trans_x(0.26), trans_y(0.4));
     glVertex2f( trans_x(0.31), trans_y(0.45));
     glVertex2f( trans_x(0.2), trans_y(0.75));           // 2. oldalág
@@ -478,14 +460,6 @@ void onDisplay( ) {
     
     glEnd();
     
-    
-    green.drawBird(-1.0, 1.0, 0.5, 1.0, 0.2);
-    
-    //if(bird_reborn_x == 1)
-       //red.drawBird(1.0, -1.0, 1.0, 0.0, 0.0);
-    
-    
-    glutPostRedisplay( );
     
     glBegin(GL_TRIANGLE_STRIP);                     // gumi kötél
     glColor3f(0.0, 0.0, 0.0);
@@ -534,14 +508,16 @@ void onDisplay( ) {
         
         if(bird_reborn_x == 1){
             green.getGreenBirdYForTime(time_slow);
+            red.drawBird(1.0, -1.0, 1.0, 0.0, 0.0);
             red.getRedBirdXForTime(time_slow/20, start_time);
             red.getRedBirdYForTime(time_slow/20, start_time);
-            red.drawBird(1.0, -1.0, 1.0, 0.0, 0.0);
+            
         } else{
             green.getGreenBirdYForTime(time_slow);
+            red.drawBird(1.0, 1.0, 1.0, 0.0, 0.0);
             red.getRedBirdXForTime(time_slow/20, start_time);
             red.getRedBirdYForTime(time_slow/20, start_time);
-            red.drawBird(1.0, 1.0, 1.0, 0.0, 0.0);
+            
         }
     } else if(bird_reborn_x == 1){
             stop = 0;
@@ -550,6 +526,9 @@ void onDisplay( ) {
                     stop = 0;
                     red.drawBird(1.0, 1.0, 1.0, 1.0, 0.0);
                 }
+    glutPostRedisplay( );
+    green.drawBird(-1.0, 1.0, 0.5, 1.0, 0.2);
+    
     
     if(button_released == 0){
     
@@ -578,31 +557,8 @@ void onDisplay( ) {
         glEnd();
     }
     
+    // ...
     
-    glPointSize(5.0);
-    glBegin(GL_POINTS);
-    glColor3d(1,1,1);
-    
-    //glVertex2f(-green.Get_x(),green.Get_y());
-    
-    glEnd();
-    
-    glBegin(GL_POINTS);
-    glColor3d(1,1,1);
-    
-    //glVertex2f(trans_x(0.43),trans_y(0.715));
-    
-    glEnd();
-    
-    glBegin(GL_POINTS);
-    glColor3d(1,1,1);
-    
-    //glVertex2f(-1.0/3.0, -1.0/3.0);
-   
-    glEnd();
-    
-    
-    // ... 
     
     glutSwapBuffers();     				// Buffercsere: rajzolas vege
     
@@ -627,7 +583,7 @@ void onMouse(int button, int state, int x, int y) {
     float ty =(300 - (float)y)/300.0;
     
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){   // A GLUT_LEFT_BUTTON / GLUT_RIGHT_BUTTON
-        if(red.isPointInBird(tx, ty))
+        if(red.isPointInBird(tx, ty))                         //illetveGLUT_DOWN / GLUT_UP
             button_pushed = 1;
         
     }   else if (button_pushed == 1 ){
@@ -658,7 +614,6 @@ void onIdle( ){
     long time = glutGet(GLUT_ELAPSED_TIME);     // program inditasa ota eltelt ido
     
     if(time % 1 == 0) time_slow++;
-    if(time % 20 == 0) time_slower++;
   
 }
 
