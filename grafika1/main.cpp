@@ -27,8 +27,8 @@
 //
 // NYILATKOZAT
 // ---------------------------------------------------------------------------------------------
-// Nev    : <VEZETEKNEV(EK)> <KERESZTNEV(EK)>
-// Neptun : <NEPTUN KOD>
+// Nev    : Bajorics Bence
+// Neptun : CG7L3O
 // ---------------------------------------------------------------------------------------------
 // ezennel kijelentem, hogy a feladatot magam keszitettem, es ha barmilyen segitseget igenybe vettem vagy
 // mas szellemi termeket felhasznaltam, akkor a forrast es az atvett reszt kommentekben egyertelmuen jeloltem.
@@ -196,7 +196,7 @@ public:
         }
         glEnd();
         
-        glBegin(GL_TRIANGLE_FAN);                   // szemgolyó
+        glBegin(GL_TRIANGLE_FAN);                   // szemgolyo
         glColor3f(0.0, 0.0, 0.0);
         
         
@@ -208,7 +208,7 @@ public:
         glEnd();
         
         
-        glBegin(GL_TRIANGLES);                      // csőr
+        glBegin(GL_TRIANGLES);                      // csor
         glColor3f(0.85, 0.75, 0.2);
         
         glVertex2f(c * (0.12 + x), r * (-0.04) + y);
@@ -218,7 +218,7 @@ public:
         glEnd();
         
         
-        glBegin(GL_TRIANGLES);                      // szemöldök
+        glBegin(GL_TRIANGLES);                      // szemoldok
         glColor3f(0.0, 0.0, 0.0);
         
         glVertex2f(c * (0.09 + x), r * (0.04) + y);
@@ -255,7 +255,7 @@ public:
         
         glEnd();
         
-        glBegin(GL_TRIANGLES);                      // szárny
+        glBegin(GL_TRIANGLES);                      // szarny
         glColor3f(0.85, 0.75, 0.2);
         
         glVertex2f(c * (-0.07 + x), r * (0.0) + y);
@@ -412,7 +412,7 @@ void onDisplay( ) {
     
     glEnd();
     
-    glBegin(GL_TRIANGLES);                      // sugár 1.
+    glBegin(GL_TRIANGLES);                      // sugar 1.
     glColor3f(1.0, 1.0, 0.0);
     
     glVertex2f(-0.75, 0.95);
@@ -421,7 +421,7 @@ void onDisplay( ) {
     
     glEnd();
     
-    glBegin(GL_TRIANGLES);                      // sugár 2.
+    glBegin(GL_TRIANGLES);                      // sugar 2.
     glColor3f(1.0, 1.0, 0.0);
     
     glVertex2f(-0.85, 0.8);
@@ -430,7 +430,7 @@ void onDisplay( ) {
     
     glEnd();
     
-    glBegin(GL_TRIANGLES);                      // sugár 3.
+    glBegin(GL_TRIANGLES);                      // sugar 3.
     glColor3f(1.0, 1.0, 0.0);
     
     glVertex2f(-0.95, 0.63);
@@ -438,34 +438,21 @@ void onDisplay( ) {
     glVertex2f(-0.85, 0.43);
     
     glEnd();
-
-    
-    glBegin(GL_POLYGON);
-    glColor3f(0.7, 0.5, 0.25);
-    
-    glVertex2f( trans_x(0.28), trans_y(0.12));
-    glVertex2f( trans_x(0.38), trans_y(0.12));
-    glVertex2f( trans_x(0.4), trans_y(0.5));        // 1. szár
-    glVertex2f( trans_x(0.6), trans_y(0.8));        // 1. oldalág
-    glVertex2f( trans_x(0.45), trans_y(0.8));
-    glVertex2f( trans_x(0.31), trans_y(0.45));      // középpont
-        
-    glEnd();
     
     glBegin(GL_POLYGON);
     glColor3f(0.7, 0.5, 0.25);
     
     glVertex2f( trans_x(0.37), trans_y(0.12));
-    glVertex2f( trans_x(0.28), trans_y(0.12));          // 2. szár
+    glVertex2f( trans_x(0.28), trans_y(0.12));          // 2. szar
     glVertex2f( trans_x(0.26), trans_y(0.4));
     glVertex2f( trans_x(0.31), trans_y(0.45));
-    glVertex2f( trans_x(0.2), trans_y(0.75));           // 2. oldalág
+    glVertex2f( trans_x(0.2), trans_y(0.75));           // 2. oldalag
     glVertex2f( trans_x(0.1), trans_y(0.75));
     
     glEnd();
     
     
-    glBegin(GL_TRIANGLE_STRIP);                     // gumi kötél
+    glBegin(GL_TRIANGLE_STRIP);                     // gumi kotel
     glColor3f(0.0, 0.0, 0.0);
     
     glVertex2f(trans_x(0.12),trans_y(0.7));
@@ -489,14 +476,14 @@ void onDisplay( ) {
         
         glVertex2f( trans_x(0.28), trans_y(0.12));
         glVertex2f( trans_x(0.38), trans_y(0.12));
-        glVertex2f( trans_x(0.4), trans_y(0.5));    // 1. szár
-        glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalág
+        glVertex2f( trans_x(0.4), trans_y(0.5));    // 1. szar
+        glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalag
         glVertex2f( trans_x(0.45), trans_y(0.8));
-        glVertex2f( trans_x(0.31), trans_y(0.45));     // középpont
+        glVertex2f( trans_x(0.31), trans_y(0.45));     // kozeppont
         
-        glEnd();
+        glEnd(); 
         
-        glBegin(GL_TRIANGLE_STRIP);                     // gumi kötél
+        glBegin(GL_TRIANGLE_STRIP);                     // gumi kotel
         glColor3f(0.0, 0.0, 0.0);
         
         glVertex2f(-1.0/3.0 - 0.07, - 1.0/3.0 - 0.012);
@@ -541,16 +528,16 @@ void onDisplay( ) {
     
         glVertex2f( trans_x(0.28), trans_y(0.12));
         glVertex2f( trans_x(0.38), trans_y(0.12));
-        glVertex2f( trans_x(0.4), trans_y(0.5));    // 1. szár
-        glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalág
+        glVertex2f( trans_x(0.4), trans_y(0.5));    // 1. szar
+        glVertex2f( trans_x(0.6), trans_y(0.8));      // 1. oldalag
         glVertex2f( trans_x(0.45), trans_y(0.8));
-        glVertex2f( trans_x(0.31), trans_y(0.45));     // középpont
+        glVertex2f( trans_x(0.31), trans_y(0.45));     // kozeppont
     
         glEnd();
     
     
         
-        glBegin(GL_TRIANGLE_STRIP);                     // gumi kötél
+        glBegin(GL_TRIANGLE_STRIP);                     // gumi kotel
         glColor3f(0.0, 0.0, 0.0);
         
         glVertex2f(-1.0/3.0 + mouse_motion_x - 0.07, -1.0/3.0 + mouse_motion_y -0.012);
@@ -559,7 +546,7 @@ void onDisplay( ) {
         glVertex2f(trans_x(0.56),trans_y(0.7));
     
         glEnd();
-    }
+    } 
     
     // ...
     
