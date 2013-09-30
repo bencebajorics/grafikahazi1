@@ -280,7 +280,6 @@ public:
         float rad = time / 180.0 * 3.14;
         
         y = y_starter + sin(rad)/1.6;
-        glutPostRedisplay( );
         
     }
 
@@ -308,7 +307,6 @@ public:
                     x = x_starter + mouse_motion_x * stop;
                     hold_upside_down = 0;
                 }
-        glutPostRedisplay( );
     }
     
     void getRedBirdYForTime(long time, long start_time){
@@ -327,7 +325,6 @@ public:
                     y = y_starter + mouse_motion_y * stop;
                     hold_upside_down = 0;
                 }
-        glutPostRedisplay( );
     }
     
     bool isPointInBird(float px, float py){
@@ -600,7 +597,6 @@ void onMouseMotion(int x, int y){
             mouse_motion_y = (300 - (float)y)/300.0 - red.Get_y_starter();
         }
     }
-    glutPostRedisplay( );
 }
 
 
@@ -609,6 +605,7 @@ void onIdle( ){
     long time = glutGet(GLUT_ELAPSED_TIME);     // program inditasa ota eltelt ido
     
     if(time % 1 == 0) time_slow++;
+    glutPostRedisplay( );
 }
 
 // ...Idaig modosithatod
